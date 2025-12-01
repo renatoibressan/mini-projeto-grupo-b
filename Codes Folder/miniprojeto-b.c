@@ -41,6 +41,6 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo); // Function 10
 
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo); // Function 11 - Renato
 
-int main() {
+int main(char *nomeArquivo) {
   return 0;
 }
