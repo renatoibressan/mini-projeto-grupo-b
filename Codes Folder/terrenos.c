@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "terrenos.h"
 
 void inicializarVetor(terreno **terrenos) {
