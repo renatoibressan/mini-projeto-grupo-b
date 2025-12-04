@@ -12,5 +12,6 @@ int main(const char *nomeArquivo) {
     option = -1;
     scanf("%d", &option);
   }
+  fclose(arq);
   return 0;
 }
