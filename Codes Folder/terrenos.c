@@ -92,13 +92,14 @@ void editarTerreno(terreno **terrenos, int id) {
 } // Function 5 - Renato
 double calcularValorTerreno(terreno **terrenos, int id) {
     int found = 0;
+    double valor_terreno;
     for (int i = 0; i < 100; i++) {
         if (terrenos[i] != NULL) {
             terreno *t = terrenos[i];
             if((*t).area==0){
                 (*t).area = (*t).largura * (*t).comprimento;
             }
-            double valor_terreno = (double)(*t).area * (double)(*t).preco_m2;
+            valor_terreno = (double)(*t).area * (double)(*t).preco_m2;
             found = 1;
             break;
         }
@@ -152,7 +153,7 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     }
     for (i = 0; i < 100; i++) {
         if (terrenos[i] != NULL) {
-            size_t resultado = fwrite(terrenos[i], sizeof(Terrenos), 1, arquivo);
+            size_t resultado = fwrite(terrenos[i], sizeof(terrenos), 1, arquivo);
             if (resultado != 1) {
                 printf("Nao foi possivel salvar o terreno ID %d.\n", (*terrenos[i]).id);
                 printf("---------------------------------------------\n");
@@ -177,7 +178,7 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     int registros_carregados = 0;
     char linha[100][200];
-    int i;
+    int i, j;
     FILE *arquivo = fopen(nomeArquivo, "rb");
     if (arquivo == NULL) {
         printf("Nao foi possivel carregar o arquivo '%s'.\n", nomeArquivo);
