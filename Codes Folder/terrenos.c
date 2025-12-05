@@ -186,7 +186,7 @@ void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
         return;
     }
     for (i = 0; i < 100; i++) {
-        while (fgets(linha[i], sizeof(linha[i]), arquivo) != EOF) {
+        while (fgets(linha[i], sizeof(linha[i]), arquivo) != NULL) {
             printf("Informacoes do terreno #%d: %s\n", (i + 1), linha[i]);
             printf("---------------------------------------------\n");
             for (j = 0; j < 200; j++) {
