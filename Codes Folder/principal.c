@@ -12,9 +12,7 @@ int main(const char *nomeArquivo) {
     option = -1;
     clearScreen();
     printf("===== SISTEMA GERENCIADOR DE BAIRROS =====\n");
-    clearScreen();
     printf("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n");
-    clearScreen();
     printf("===== MENU =====\nOpcoes:\n");
     printf("1. Criar um terreno\n");
     printf("2. Deletar um terreno\n");
