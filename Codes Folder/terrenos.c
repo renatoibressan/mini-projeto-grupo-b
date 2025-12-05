@@ -8,9 +8,9 @@ void inicializarVetor(terreno **terrenos) {
 void criarTerreno(terreno **terrenos) {
 } // Function 2 - Aryan
 void deletarTerreno(terreno **terrenos) {
-} // Function 3 - Amanda
+} // Function 3 - Aryan
 void mostrarTerreno(terreno **terrenos, int id) {
-} // Function 4 - Aryan
+} // Function 4 - Amanda
 void editarTerreno(terreno **terrenos, int id) {
     int i, j;
     for (i = 0; i < 10; i++) {
@@ -27,10 +27,12 @@ void editarTerreno(terreno **terrenos, int id) {
 double calcularValorTerreno(terreno **terrenos, int id) {
 } // Function 6 - Aryan
 int contarTerrenosOcupados(terreno **terrenos) {
-    int i, count;
-    for (i = 0; i < 10; i++) {
+    int i, count = 0;
+    for (i = 0; i < 100; i++) {
         if (terrenos[i] != NULL) count++;
     }
+    printf("Terrenos Ocupados : %d\n", count);
+    printf("---------------------------------------------\n");
     return count;
 } // Function 7 - Renato
 int contarTerrenosLivres(terreno **terrenos) {
