@@ -1,7 +1,86 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "terrenos.h"
+
+typedef struct Data {
+    int dia, mes, ano;
+} data;
+typedef struct Pessoa {
+    char nome[100];
+    char cpf[20];
+    data data_nascimento;
+    char telefone[20];
+} pessoa;
+typedef struct Terrenos {
+    int id;
+    pessoa dono;
+    data data_compra;
+    float largura, comprimento, area, preco_m2;
+} terreno;
+
+void funcao2(void);
+void funcao3(void);
+void funcao4(void);
+void funcao5(void);
+void funcao6(void);
+void funcao7(void);
+void funcao8(void);
+void funcao9(void);
+void funcao10(void);
+void funcao11(void);
+void clearScreen(void);
+void inicializarVetor(terreno **terrenos); // Function 1 - Aryan
+void criarTerreno(terreno **terrenos); // Function 2 - Aryan
+void deletarTerreno(terreno **terrenos); // Function 3 - Aryan
+void mostrarTerreno(terreno **terrenos, int id); // Function 4 - Amanda
+void editarTerreno(terreno **terrenos, int id); // Function 5 - Renato
+double calcularValorTerreno(terreno **terrenos, int id); // Function 6 - Aryan
+int contarTerrenosOcupados(terreno **terrenos); // Function 7 - Renato
+int contarTerrenosLivres(terreno **terrenos); // Function 8 - Amanda
+double calcularValorTotal(terreno **terrenos); // Function 9 - Amanda
+void salvarTerrenos(terreno **terrenos, const char *nomeArquivo); // Function 10 - Amanda
+void carregarTerrenos(terreno **terrenos, const char *nomeArquivo); // Function 11 - Renato
+
+int main(const char *nomeArquivo) {
+    clearScreen();
+    printf("===== SISTEMA GERENCIADOR DE BAIRROS =====\n");
+    printf("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n");
+    int option = -1;
+    terreno **t;
+    int i;
+    inicializarVetor(t);
+    do {
+        option = -1;
+        printf("===== MENU =====\nOpcoes:\n");
+        printf("1. Criar um terreno\n");
+        printf("2. Deletar um terreno\n");
+        printf("3. Mostrar um terreno\n");
+        printf("4. Editar um terreno\n");
+        printf("5. Calcular o valor de um terreno\n");
+        printf("6. Contar os terrenos ocupados\n");
+        printf("7. Contar os terrenos livres\n");
+        printf("8. Calcular o valor de todos os terrenos\n");
+        printf("9. Salvar os terrenos\n");
+        printf("10. Carregar os terrenos\n");
+        printf("Escolha uma das opcoes acima: ");
+        scanf("%d", &option);
+        switch (option) {
+            case 1: funcao2(); break;
+            case 2: funcao3(); break;
+            case 3: funcao4(); break;
+            case 4: funcao5(); break;
+            case 5: funcao6(); break;
+            case 6: funcao7(); break;
+            case 7: funcao8(); break;
+            case 8: funcao9(); break;
+            case 9: funcao10(); break;
+            case 10: funcao11(); break;
+            case 0: printf("Encerrando o programa...\n"); break;
+            default: printf("Opcao invalida!\n");
+        } 
+    } while (option != 0);
+    return 0;
+}
 
 void inicializarVetor(terreno **terrenos) {
     terrenos = (terreno **)malloc(100*sizeof(terreno*));
@@ -12,7 +91,7 @@ void inicializarVetor(terreno **terrenos) {
 void criarTerreno(terreno **terrenos) {
     terrenos = (terreno **)malloc(100*sizeof(terreno*));
     for (int i = 0; i < 100; i++) {
-        scanf("%d %[^\n]%*c %[^\n]%*c %d %d %d %[^\n]%*c %d %d %d %f %f %f", 
+        scanf("%d %[^\n] %[^\n] %d %d %d %[^\n] %d %d %d %f %f %f", 
             &((*terrenos[i]).id), ((*terrenos[i]).dono.nome), ((*terrenos[i]).dono.cpf), 
             &((*terrenos[i]).dono.data_nascimento.dia), &((*terrenos[i]).dono.data_nascimento.mes), 
             &((*terrenos[i]).dono.data_nascimento.ano), ((*terrenos[i]).dono.telefone), 

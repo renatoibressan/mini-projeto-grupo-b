@@ -4,15 +4,15 @@
 #include "terrenos.h"
 
 int main(const char *nomeArquivo) {
+  clearScreen();
+  printf("===== SISTEMA GERENCIADOR DE BAIRROS =====\n");
+  printf("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n");
   int option = -1;
   terreno **t;
   int i;
   inicializarVetor(t);
-  while (option != 0) {
+  do {
     option = -1;
-    clearScreen();
-    printf("===== SISTEMA GERENCIADOR DE BAIRROS =====\n");
-    printf("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n");
     printf("===== MENU =====\nOpcoes:\n");
     printf("1. Criar um terreno\n");
     printf("2. Deletar um terreno\n");
@@ -38,8 +38,8 @@ int main(const char *nomeArquivo) {
       case 9: funcao10(); break;
       case 10: funcao11(); break;
       case 0: printf("Encerrando o programa...\n"); break;
-      default: printf("Opcao invalida!\nPor favor, insira novamente uma opcao valida: "); scanf("%d", &option);
+      default: printf("Opcao invalida!\n");
     } 
-  }
+  } while (option != 0);
   return 0;
 }
