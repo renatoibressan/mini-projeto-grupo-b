@@ -19,7 +19,6 @@ void criarTerreno(terreno **terrenos) {
             &((*terrenos[i]).data_compra.dia), &((*terrenos[i]).data_compra.mes), &((*terrenos[i]).data_compra.ano),  
             &((*terrenos[i]).largura), &((*terrenos[i]).comprimento), &((*terrenos[i]).preco_m2));
         printf("Terreno #%d criado com sucesso!\n", (i + 1));
-        clearScreen();
     }
 } // Function 2 - Aryan
 void deletarTerreno(terreno **terrenos) {
@@ -31,7 +30,6 @@ void deletarTerreno(terreno **terrenos) {
     for (i = 0; i < 100; i++) {
         terrenos[i] = NULL;
         printf("Terreno #%d deletado com sucesso!\n", (i + 1));
-        clearScreen();
     }
 } // Function 3 - Aryan
 void mostrarTerreno(terreno **terrenos, int id) {
