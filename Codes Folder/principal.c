@@ -3,43 +3,88 @@
 #include <string.h>
 #include "terrenos.h"
 
-int main(const char *nomeArquivo) {
+int main(char *nomeArquivo) {
   clearScreen();
   printf("===== SISTEMA GERENCIADOR DE BAIRROS =====\n");
   printf("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n");
-  int option = -1;
+  char option = 'x';
   terreno **t;
-  int i;
-  inicializarVetor(t);
-  do {
-    option = -1;
+  int i, idTeste, count;
+  double valorTerreno, valorTotal;
+  inicializarVetor(&t);
+  while (option != '0') {
     printf("===== MENU =====\nOpcoes:\n");
-    printf("1. Criar um terreno\n");
-    printf("2. Deletar um terreno\n");
-    printf("3. Mostrar um terreno\n");
-    printf("4. Editar um terreno\n");
-    printf("5. Calcular o valor de um terreno\n");
-    printf("6. Contar os terrenos ocupados\n");
-    printf("7. Contar os terrenos livres\n");
-    printf("8. Calcular o valor de todos os terrenos\n");
-    printf("9. Salvar os terrenos\n");
-    printf("10. Carregar os terrenos\n");
+    printf("A. Criar um terreno\n");
+    printf("B. Deletar um terreno\n");
+    printf("C. Mostrar um terreno\n");
+    printf("D. Editar um terreno\n");
+    printf("E. Calcular o valor de um terreno\n");
+    printf("F. Contar os terrenos ocupados\n");
+    printf("G. Contar os terrenos livres\n");
+    printf("H. Calcular o valor de todos os terrenos\n");
+    printf("I. Salvar os terrenos\n");
+    printf("J. Carregar os terrenos\n");
     printf("Escolha uma das opcoes acima: ");
-    scanf("%d", &option);
+    option = getchar();
+    getchar();
+    if (option >= 'a' && option <= 'z') option -= 32;
+    clearScreen();
     switch (option) {
-      case 1: funcao2(); break;
-      case 2: funcao3(); break;
-      case 3: funcao4(); break;
-      case 4: funcao5(); break;
-      case 5: funcao6(); break;
-      case 6: funcao7(); break;
-      case 7: funcao8(); break;
-      case 8: funcao9(); break;
-      case 9: funcao10(); break;
-      case 10: funcao11(); break;
-      case 0: printf("Encerrando o programa...\n"); break;
-      default: printf("Opcao invalida!\n");
+      case 'A':
+        criarTerreno(t);
+        break;
+      case 'B':
+        deletarTerreno(t);
+        break;
+      case 'C':
+        printf("Insira um ID para procura do terreno: ");
+        scanf("%d", &idTeste);
+        mostrarTerreno(t, idTeste);
+        break;
+      case 'D':
+        printf("Insira um ID para procura do terreno: ");
+        scanf("%d", &idTeste);
+        editarTerreno(t, idTeste);
+        break;
+      case 'E':
+        printf("Insira um ID para procura do terreno: ");
+        scanf("%d", &idTeste);
+        valorTerreno = calcularValorTerreno(t, idTeste);
+        if (valorTerreno == -1) break;
+        else {
+          printf("Valor do Terreno de ID %d: R$ %.2f\n", idTeste, valorTerreno);
+          printf("---------------------------------------------\n");
+        }
+        break;
+      case 'F':
+        count = contarTerrenosOcupados(t);
+        printf("Terrenos Ocupados: %d\n", count);
+        printf("---------------------------------------------\n");
+        break;
+      case 'G':
+        count = contarTerrenosLivres(t);
+        printf("Terrenos Livres: %d\n", count);
+        printf("---------------------------------------------\n");
+        break;
+      case 'H':
+        valorTotal = calcularValorTotal(t);
+        printf("Valor Total de todos os Terrenos: R$ %.2f\n", valorTotal);
+        printf("---------------------------------------------\n");
+        break;
+      case 'I':
+        nomeArquivo = "terrenos.txt";
+        salvarTerrenos(t, nomeArquivo);
+        break;
+      case 'J': 
+        nomeArquivo = "terrenos.txt";
+        carregarTerrenos(t, nomeArquivo);
+        break;
+      case '0':
+        printf("Encerrando o programa...\n"); 
+        break;
+      default: printf("Opcao invalida! Pressione ENTER para voltar: "); getchar();
     } 
-  } while (option != 0);
+  }
+  clearScreen();
   return 0;
 }
