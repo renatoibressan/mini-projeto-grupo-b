@@ -19,16 +19,16 @@ void criarTerreno(terreno **terrenos) {
     printf("Terreno de ID %d criado com sucesso!\n", (*terrenos[z]).id);
     z++;
 } // Function 2 - Aryan
-void deletarTerreno(terreno **terrenos) {
-    int i;
-    for (i = 0; i < 100; i++) {
-      free(terrenos[i]);
+void deletarTerreno(terreno ***terrenos) {
+    for (int i = 0; i < 100; i++) {
+        if ((*terrenos)[i] != NULL) {
+            free((*terrenos)[i]);
+            (*terrenos)[i] = NULL;
+            printf("Terreno deletado com sucesso!\n");
+        }
     }
-    free(terrenos);
-    for (i = 0; i < 100; i++) {
-        terrenos[i] = NULL;
-        printf("Terreno #%d deletado com sucesso!\n", (i + 1));
-    }
+    free(*terrenos);
+    *terrenos = NULL;
 } // Function 3 - Aryan
 void mostrarTerreno(terreno **terrenos, int id) {
     int i = 0;

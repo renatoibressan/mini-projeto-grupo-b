@@ -34,7 +34,7 @@ int main(char *nomeArquivo) {
         criarTerreno(t);
         break;
       case 'B':
-        deletarTerreno(t);
+        deletarTerreno(&t);
         break;
       case 'C':
         printf("Insira um ID para procura do terreno: ");
