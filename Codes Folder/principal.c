@@ -72,11 +72,11 @@ int main(char *nomeArquivo) {
         printf("---------------------------------------------\n");
         break;
       case 'I':
-        nomeArquivo = "terrenos.txt";
+        nomeArquivo = "terrenos";
         salvarTerrenos(t, nomeArquivo);
         break;
       case 'J': 
-        nomeArquivo = "terrenos.txt";
+        nomeArquivo = "terrenos";
         carregarTerrenos(t, nomeArquivo);
         break;
       case '0':

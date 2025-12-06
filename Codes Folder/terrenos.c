@@ -215,23 +215,42 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
 } // Function 10 - Amanda
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     int registros_carregados = 0;
-    char linha[100][200];
-    int i, j;
+    char linha[200];
+    int i = 0;
     FILE *arquivo = fopen(nomeArquivo, "rb");
     if (arquivo == NULL) {
         printf("Nao foi possivel carregar o arquivo '%s'.\n", nomeArquivo);
         printf("---------------------------------------------\n");
         return;
     }
-    for (i = 0; i < 100; i++) {
-        while (fgets(linha[i], sizeof(linha[i]), arquivo) != NULL) {
-            printf("Informacoes do terreno #%d: %s\n", (i + 1), linha[i]);
-            printf("---------------------------------------------\n");
-            for (j = 0; j < 200; j++) {
-                if (linha[i][j] == '\n') registros_carregados++;
-            }
-        }
+    while (fgets(linha, sizeof(linha), arquivo) != NULL && i < 100) {
+        sscanf(linha, "%d %106[^;]; %14[^;]; %d %d %d %12[^;]; %d %d %d %f %f %f", &(*terrenos[i]).id, (*terrenos[i]).dono.nome,
+            (*terrenos[i]).dono.cpf, &(*terrenos[i]).dono.data_nascimento.dia, &(*terrenos[i]).dono.data_nascimento.mes,
+            &(*terrenos[i]).dono.data_nascimento.ano, (*terrenos[i]).dono.telefone, &(*terrenos[i]).data_compra.dia,
+            &(*terrenos[i]).data_compra.mes, &(*terrenos[i]).data_compra.ano, &(*terrenos[i]).largura, &(*terrenos[i]).comprimento,
+            &(*terrenos[i]).preco_m2);
+        (*terrenos[i]).area = (*terrenos[i]).largura * (*terrenos[i]).comprimento;
+        printf("ID: %d\n", (*terrenos[i]).id);
+        printf("---------------------------------------------\n");
+        printf("Dono:\n");
+        printf("Nome: %s\n", (*terrenos[i]).dono.nome);
+        printf("CPF: %s\n", (*terrenos[i]).dono.cpf);
+        printf("Data de Nascimento: %d/%d/%d\n",(*terrenos[i]).dono.data_nascimento.dia, 
+            (*terrenos[i]).dono.data_nascimento.mes, 
+            (*terrenos[i]).dono.data_nascimento.ano);
+        printf("Telefone: %s\n", (*terrenos[i]).dono.telefone);
+        printf("---------------------------------------------\n");
+        printf("Data da Compra: %d/%d/%d\n",(*terrenos[i]).data_compra.dia,
+            (*terrenos[i]).data_compra.mes,
+            (*terrenos[i]).data_compra.ano);
+        printf("Largura: %.2f m\n", (*terrenos[i]).largura);
+        printf("Comprimento: %.2f m\n", (*terrenos[i]).comprimento);
+        printf("Area: %.2f m2\n", (*terrenos[i]).area);
+        printf("Preco por m2: R$ %.2f\n", (*terrenos[i]).preco_m2);
+        printf("---------------------------------------------\n");
+        i++;
     }
+    registros_carregados = i;
     fclose(arquivo);
     printf("Foram carregados do arquivo %d terrenos.\n", registros_carregados);
     printf("---------------------------------------------\n");
