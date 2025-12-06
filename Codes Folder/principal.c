@@ -57,13 +57,11 @@ int main(char *nomeArquivo) {
         }
         break;
       case 'F':
-        inicializarVetor(&t);
         count = contarTerrenosOcupados(&t);
         printf("Terrenos Ocupados: %d\n", count);
         printf("---------------------------------------------\n");
         break;
       case 'G':
-        inicializarVetor(&t);
         count = contarTerrenosLivres(&t);
         printf("Terrenos Livres: %d\n", count);
         printf("---------------------------------------------\n");
@@ -77,7 +75,7 @@ int main(char *nomeArquivo) {
         nomeArquivo = "terrenos";
         salvarTerrenos(t, nomeArquivo);
         break;
-      case 'J': 
+      case 'J':
         nomeArquivo = "terrenos";
         carregarTerrenos(t, nomeArquivo);
         break;

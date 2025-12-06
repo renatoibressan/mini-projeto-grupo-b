@@ -43,7 +43,7 @@ void deletarTerreno(terreno ***terrenos) {
     }
 }
 void mostrarTerreno(terreno **terrenos, int id) {
-    if (*terrenos == NULL) {
+    if (terrenos == NULL) {
         printf("Nao ha terrenos para mostrar!\n");
         printf("---------------------------------------------\n");
         return;
@@ -62,11 +62,13 @@ void mostrarTerreno(terreno **terrenos, int id) {
             printf("Nome: %s\n", (*terrenos[i]).dono.nome);
             printf("CPF: %s\n", (*terrenos[i]).dono.cpf);
             printf("Data de Nascimento: %d/%d/%d\n",(*terrenos[i]).dono.data_nascimento.dia, 
-                (*terrenos[i]).dono.data_nascimento.mes, (*terrenos[i]).dono.data_nascimento.ano);
+                (*terrenos[i]).dono.data_nascimento.mes, 
+                (*terrenos[i]).dono.data_nascimento.ano);
             printf("Telefone: %s\n", (*terrenos[i]).dono.telefone);
             printf("---------------------------------------------\n");
             printf("Data da Compra: %d/%d/%d\n",(*terrenos[i]).data_compra.dia,
-                (*terrenos[i]).data_compra.mes, (*terrenos[i]).data_compra.ano);
+                (*terrenos[i]).data_compra.mes,
+                (*terrenos[i]).data_compra.ano);
             printf("Largura: %.2f m\n", (*terrenos[i]).largura);
             printf("Comprimento: %.2f m\n", (*terrenos[i]).comprimento);
             printf("Area: %.2f m2\n", (*terrenos[i]).area);
@@ -84,7 +86,7 @@ void mostrarTerreno(terreno **terrenos, int id) {
     }
 }
 void editarTerreno(terreno **terrenos, int id) {
-    if (*terrenos == NULL) {
+    if (terrenos == NULL) {
         printf("Nao ha terrenos para editar!\n");
         printf("---------------------------------------------\n");
         return;
@@ -152,30 +154,24 @@ void editarTerreno(terreno **terrenos, int id) {
     }
 }
 double calcularValorTerreno(terreno **terrenos, int id) {
-    if (*terrenos == NULL) {
+    if (terrenos == NULL) {
         printf("Nao ha terrenos para calcular o valor!\n");
         printf("---------------------------------------------\n");
         return -1;
     }
-    int encontrado = 0;
-    double valor_terreno;
     for (int i = 0; i < 100; i++) {
-        if (terrenos[i] != NULL) {
+        if (terrenos[i] != NULL && (*terrenos[i]).id == id) {
             terreno *t = terrenos[i];
-            if((*t).area==0){
+            if((*t).area == 0){
                 (*t).area = (*t).largura * (*t).comprimento;
             }
-            valor_terreno = (double)(*t).area * (double)(*t).preco_m2;
-            encontrado = 1;
-            break;
-        }
-        if (!encontrado) {
-            printf("Nenhum terreno com ID %d foi encontrado.\n", id);
-            printf("---------------------------------------------\n");
-            return -1;
+            double valor_terreno = (double)(*t).area * (double)(*t).preco_m2;
+            return valor_terreno;
         }
     }
-    return valor_terreno;
+    printf("Nenhum terreno com ID %d foi encontrado.\n", id);
+    printf("---------------------------------------------\n");
+    return -1;
 }
 int contarTerrenosOcupados(terreno ***terrenos) {
     if (*terrenos == NULL) return 0;
@@ -199,7 +195,7 @@ double calcularValorTotal(terreno **terrenos) {
     for (i = 0; i < 100; i++) {
         if (terrenos[i] != NULL) {
             terreno *t = terrenos[i];
-            if((*t).area==0){
+            if((*t).area == 0){
                 (*t).area = (*t).largura * (*t).comprimento;
             }
             double valor_terreno = (double)(*t).area * (double)(*t).preco_m2;
@@ -212,7 +208,7 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     int registros_salvos = 0;
     char lista_ids[150] = ""; 
     char id_buffer[10];  
-    int i;               
+    int i;
     FILE *arquivo = fopen(nomeArquivo, "wb");
     if (arquivo == NULL) {
         printf("Nao foi possivel salvar o arquivo '%s'.\n", nomeArquivo);
