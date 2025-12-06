@@ -237,7 +237,6 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     }
 }
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
-    int registros_carregados = 0;
     char linha[200];
     int i = 0;
     FILE *arquivo = fopen(nomeArquivo, "rb");
@@ -246,13 +245,21 @@ void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
         printf("---------------------------------------------\n");
         return;
     }
-    ordenarTerrenos(terrenos);
     while (fgets(linha, sizeof(linha), arquivo) != NULL && i < 100) {
-        sscanf(linha, "%d %104[^;]; %14[^;]; %d %d %d %14[^;]; %d %d %d %f %f %f", &(*terrenos[i]).id, (*terrenos[i]).dono.nome,
+        terrenos[i] = malloc(sizeof(terreno));
+        if (!terrenos[i]) exit(1);
+        int read = sscanf(linha, "%d %s %s %d %d %d %s %d %d %d %f %f %f", &(*terrenos[i]).id, (*terrenos[i]).dono.nome,
             (*terrenos[i]).dono.cpf, &(*terrenos[i]).dono.data_nascimento.dia, &(*terrenos[i]).dono.data_nascimento.mes,
             &(*terrenos[i]).dono.data_nascimento.ano, (*terrenos[i]).dono.telefone, &(*terrenos[i]).data_compra.dia,
             &(*terrenos[i]).data_compra.mes, &(*terrenos[i]).data_compra.ano, &(*terrenos[i]).largura, &(*terrenos[i]).comprimento,
             &(*terrenos[i]).preco_m2);
+        if (read != 13) {
+            printf("Erro na linha #%d do arquivo.\n", (i + 1));
+            printf("---------------------------------------------\n");
+            free(terrenos[i]);
+            terrenos[i] = NULL;
+            continue;
+        }
         (*terrenos[i]).area = (*terrenos[i]).largura * (*terrenos[i]).comprimento;
         printf("ID: %d\n", (*terrenos[i]).id);
         printf("---------------------------------------------\n");
@@ -274,9 +281,8 @@ void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
         printf("---------------------------------------------\n");
         i++;
     }
-    registros_carregados = i;
     fclose(arquivo);
-    printf("Foram carregados do arquivo %d terrenos.\n", registros_carregados);
+    printf("Foram carregados do arquivo %d terrenos.\n", i);
     printf("---------------------------------------------\n");
 }
 void clearScreen(void) {
