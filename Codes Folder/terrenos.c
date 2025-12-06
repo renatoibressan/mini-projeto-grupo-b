@@ -162,9 +162,7 @@ double calcularValorTerreno(terreno **terrenos, int id) {
     for (int i = 0; i < 100; i++) {
         if (terrenos[i] != NULL && (*terrenos[i]).id == id) {
             terreno *t = terrenos[i];
-            if((*t).area == 0){
-                (*t).area = (*t).largura * (*t).comprimento;
-            }
+            (*t).area = (*t).largura * (*t).comprimento;
             double valor_terreno = (double)(*t).area * (double)(*t).preco_m2;
             return valor_terreno;
         }
@@ -195,9 +193,7 @@ double calcularValorTotal(terreno **terrenos) {
     for (i = 0; i < 100; i++) {
         if (terrenos[i] != NULL) {
             terreno *t = terrenos[i];
-            if((*t).area == 0){
-                (*t).area = (*t).largura * (*t).comprimento;
-            }
+            (*t).area = (*t).largura * (*t).comprimento;
             double valor_terreno = (double)(*t).area * (double)(*t).preco_m2;
             valor_total_geral += valor_terreno;
         }
