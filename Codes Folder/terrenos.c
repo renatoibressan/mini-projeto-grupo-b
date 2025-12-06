@@ -23,7 +23,7 @@ void inicializarVetor(terreno ***terrenos) {
     for (int i = 0; i < 100; i++) {
         (*terrenos)[i] = NULL;
     }
-} // Function 1 - Aryan
+}
 void criarTerreno(terreno **terrenos) {
     terreno *t = malloc(sizeof(terreno));
     scanf("%d %[^\n]%*c %[^\n]%*c %d %d %d %[^\n]%*c %d %d %d %f %f %f", &((*t).id), (*t).dono.nome, (*t).dono.cpf,
@@ -32,7 +32,7 @@ void criarTerreno(terreno **terrenos) {
     terrenos[z] = t;
     printf("Terreno de ID %d criado com sucesso!\n", (*terrenos[z]).id);
     z++;
-} // Function 2 - Aryan
+}
 void deletarTerreno(terreno ***terrenos) {
     for (int i = 0; i < 100; i++) {
         if ((*terrenos)[i] != NULL) {
@@ -41,7 +41,7 @@ void deletarTerreno(terreno ***terrenos) {
             (*terrenos)[i] = NULL;
         }
     }
-} // Function 3 - Aryan
+}
 void mostrarTerreno(terreno **terrenos, int id) {
     int i = 0;
     int encontrado = 0;
@@ -78,7 +78,7 @@ void mostrarTerreno(terreno **terrenos, int id) {
         printf("Nenhum terreno com ID %d foi encontrado.\n", id);
         printf("---------------------------------------------\n");
     }
-} // Function 4 - Amanda
+}
 void editarTerreno(terreno **terrenos, int id) {
     int option, encontrado = 0;
     terreno *t = malloc(sizeof(terreno));
@@ -140,7 +140,7 @@ void editarTerreno(terreno **terrenos, int id) {
         printf("Nenhum terreno com ID %d foi encontrado.\n", id);
         printf("---------------------------------------------\n");
     }
-} // Function 5 - Renato
+}
 double calcularValorTerreno(terreno **terrenos, int id) {
     int encontrado = 0;
     double valor_terreno;
@@ -161,7 +161,7 @@ double calcularValorTerreno(terreno **terrenos, int id) {
         return -1;
     }
     else return valor_terreno;
-} // Function 6 - Aryan
+}
 int contarTerrenosOcupados(terreno ***terrenos) {
     if (*terrenos == NULL) return 0;
     int count = 0;
@@ -169,7 +169,7 @@ int contarTerrenosOcupados(terreno ***terrenos) {
         if ((*terrenos)[i] != NULL) count++;
     }
     return count;
-} // Function 7 - Renato
+}
 int contarTerrenosLivres(terreno ***terrenos) {
     if (*terrenos == NULL) return 100;
     int count = 0;
@@ -177,7 +177,7 @@ int contarTerrenosLivres(terreno ***terrenos) {
         if ((*terrenos)[i] == NULL) count++; 
     }
     return count;
-} // Function 8 - Amanda
+}
 double calcularValorTotal(terreno **terrenos) {
     double valor_total_geral = 0;
     int i ;
@@ -192,7 +192,7 @@ double calcularValorTotal(terreno **terrenos) {
         }
     }
     return valor_total_geral;
-} // Function 9 - Amanda
+}
 void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     int registros_salvos = 0;
     char lista_ids[150] = ""; 
@@ -228,7 +228,7 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
         printf("IDs dos terrenos salvos: [%s]\n", lista_ids);
         printf("---------------------------------------------\n");
     }
-} // Function 10 - Amanda
+}
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     int registros_carregados = 0;
     char linha[200];
@@ -271,7 +271,7 @@ void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     fclose(arquivo);
     printf("Foram carregados do arquivo %d terrenos.\n", registros_carregados);
     printf("---------------------------------------------\n");
-} // Function 11 - Renato
+}
 void clearScreen(void) {
 #ifdef _WIN32
     system("cls");
