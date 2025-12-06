@@ -224,7 +224,7 @@ void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
         return;
     }
     while (fgets(linha, sizeof(linha), arquivo) != NULL && i < 100) {
-        sscanf(linha, "%d %106[^;]; %14[^;]; %d %d %d %12[^;]; %d %d %d %f %f %f", &(*terrenos[i]).id, (*terrenos[i]).dono.nome,
+        sscanf(linha, "%d %104[^;]; %14[^;]; %d %d %d %14[^;]; %d %d %d %f %f %f", &(*terrenos[i]).id, (*terrenos[i]).dono.nome,
             (*terrenos[i]).dono.cpf, &(*terrenos[i]).dono.data_nascimento.dia, &(*terrenos[i]).dono.data_nascimento.mes,
             &(*terrenos[i]).dono.data_nascimento.ano, (*terrenos[i]).dono.telefone, &(*terrenos[i]).data_compra.dia,
             &(*terrenos[i]).data_compra.mes, &(*terrenos[i]).data_compra.ano, &(*terrenos[i]).largura, &(*terrenos[i]).comprimento,
