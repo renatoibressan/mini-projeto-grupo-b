@@ -4,6 +4,20 @@
 #include "terrenos.h"
 
 int z = 0;
+void ordenarTerrenos(terreno **terrenos) {
+    terreno *temp;
+    for (int i = 0; i < 99; i++) {
+        if (terrenos[i] == NULL) continue;
+        for (int j = i + 1; j < 100; j++) {
+            if (terrenos[j] == NULL) continue;
+            if ((*terrenos[i]).id > (*terrenos[j]).id) {
+                temp = terrenos[i];
+                terrenos[i] = terrenos[j];
+                terrenos[j] = temp;
+            }
+        }
+    }
+}
 void inicializarVetor(terreno ***terrenos) {
     *terrenos = malloc(100*sizeof(terreno*));
     for (int i = 0; i < 100; i++) {
@@ -22,17 +36,16 @@ void criarTerreno(terreno **terrenos) {
 void deletarTerreno(terreno ***terrenos) {
     for (int i = 0; i < 100; i++) {
         if ((*terrenos)[i] != NULL) {
+            printf("Terreno de ID %d deletado com sucesso!\n", (*(*terrenos)[i]).id);
             free((*terrenos)[i]);
             (*terrenos)[i] = NULL;
-            printf("Terreno deletado com sucesso!\n");
         }
     }
-    free(*terrenos);
-    *terrenos = NULL;
 } // Function 3 - Aryan
 void mostrarTerreno(terreno **terrenos, int id) {
     int i = 0;
     int encontrado = 0;
+    ordenarTerrenos(terrenos);
     while (i < 100) {
         (*terrenos[i]).area = (*terrenos[i]).largura * (*terrenos[i]).comprimento;
         if ((*terrenos[i]).id == id) {
@@ -149,17 +162,19 @@ double calcularValorTerreno(terreno **terrenos, int id) {
     }
     else return valor_terreno;
 } // Function 6 - Aryan
-int contarTerrenosOcupados(terreno **terrenos) {
+int contarTerrenosOcupados(terreno ***terrenos) {
+    if (*terrenos == NULL) return 0;
     int count = 0;
     for (int i = 0; i < 100; i++) {
-        if (terrenos[i] != NULL) count++;
+        if ((*terrenos)[i] != NULL) count++;
     }
     return count;
 } // Function 7 - Renato
-int contarTerrenosLivres(terreno **terrenos) {
+int contarTerrenosLivres(terreno ***terrenos) {
+    if (*terrenos == NULL) return 100;
     int count = 0;
     for (int i = 0; i < 100; i++) {    
-        if (terrenos[i] == NULL) count++; 
+        if ((*terrenos)[i] == NULL) count++; 
     }
     return count;
 } // Function 8 - Amanda
@@ -189,6 +204,7 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
         printf("---------------------------------------------\n");
         return;
     }
+    ordenarTerrenos(terrenos);
     for (i = 0; i < 100; i++) {
         if (terrenos[i] != NULL) {
             size_t resultado = fwrite(terrenos[i], sizeof(terrenos), 1, arquivo);
@@ -223,6 +239,7 @@ void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
         printf("---------------------------------------------\n");
         return;
     }
+    ordenarTerrenos(terrenos);
     while (fgets(linha, sizeof(linha), arquivo) != NULL && i < 100) {
         sscanf(linha, "%d %104[^;]; %14[^;]; %d %d %d %14[^;]; %d %d %d %f %f %f", &(*terrenos[i]).id, (*terrenos[i]).dono.nome,
             (*terrenos[i]).dono.cpf, &(*terrenos[i]).dono.data_nascimento.dia, &(*terrenos[i]).dono.data_nascimento.mes,
