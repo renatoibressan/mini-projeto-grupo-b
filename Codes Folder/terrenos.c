@@ -26,6 +26,8 @@ void inicializarVetor(terreno ***terrenos) {
 }
 void criarTerreno(terreno **terrenos) {
     terreno *t = malloc(sizeof(terreno));
+    printf("Insira:\nID do terreno\nNome completo do dono\nCPF do dono (XXX.XXX.XXX-XX)\nData de nascimento do dono (DD MM AAAA)\n");
+    printf("Telefone do dono (DD-XXXXX-XXXX)\nData de compra do terreno (DD MM AAAA)\nLargura e comprimento do terreno\nPreco do m2\n");
     scanf("%d %[^\n]%*c %[^\n]%*c %d %d %d %[^\n]%*c %d %d %d %f %f %f", &((*t).id), (*t).dono.nome, (*t).dono.cpf,
         &((*t).dono.data_nascimento.dia), &((*t).dono.data_nascimento.mes), &((*t).dono.data_nascimento.ano), (*t).dono.telefone, 
         &((*t).data_compra.dia), &((*t).data_compra.mes), &((*t).data_compra.ano), &((*t).largura), &((*t).comprimento), &((*t).preco_m2));
