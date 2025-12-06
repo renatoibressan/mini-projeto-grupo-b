@@ -43,7 +43,7 @@ void mostrarTerreno(terreno **terrenos, int id) {
             printf("Dono:\n");
             printf("Nome: %s\n", (*terrenos[i]).dono.nome);
             printf("CPF: %s\n", (*terrenos[i]).dono.cpf);
-            printf("Data Nascimento: %d/%d/%d\n",(*terrenos[i]).dono.data_nascimento.dia, 
+            printf("Data de Nascimento: %d/%d/%d\n",(*terrenos[i]).dono.data_nascimento.dia, 
                 (*terrenos[i]).dono.data_nascimento.mes, 
                 (*terrenos[i]).dono.data_nascimento.ano);
             printf("Telefone: %s\n", (*terrenos[i]).dono.telefone);
@@ -67,26 +67,69 @@ void mostrarTerreno(terreno **terrenos, int id) {
     }
 } // Function 4 - Amanda
 void editarTerreno(terreno **terrenos, int id) {
-    int found = 0;
+    int option, encontrado = 0;
+    terreno *t = malloc(sizeof(terreno));
     for (int i = 0; i < 100; i++) {
         if ((*terrenos[i]).id == id) {
-            scanf("%[^\n]%*c %[^\n]%*c %d %d %d %[^\n]%*c %d %d %d %f %f %f", 
-                (*terrenos[i]).dono.nome, (*terrenos[i]).dono.cpf, 
-                &((*terrenos[i]).dono.data_nascimento.dia), &((*terrenos[i]).dono.data_nascimento.mes), 
-                &((*terrenos[i]).dono.data_nascimento.ano), (*terrenos[i]).dono.telefone, 
-                &((*terrenos[i]).data_compra.dia), &((*terrenos[i]).data_compra.mes), &((*terrenos[i]).data_compra.ano),  
-                &((*terrenos[i]).largura), &((*terrenos[i]).comprimento), &((*terrenos[i]).preco_m2));
-            found = 1;
+            printf("Opcoes:\n");
+            printf("1. Editar nome do dono\n");
+            printf("2. Editar CPF do dono\n");
+            printf("3. Editar data de nascimento do dono\n");
+            printf("4. Editar telefone do dono\n");
+            printf("5. Editar data de compra do terreno\n");
+            printf("6. Editar medidas do terreno\n");
+            printf("7. Editar preco do m2 do terreno\n");
+            printf("Qual edicao deseja realizar? ");
+            scanf("%d", &option);
+            switch (option) {
+                case 1:
+                    scanf("%[^\n]%*c", (*t).dono.nome);
+                    strcpy((*terrenos[i]).dono.nome, (*t).dono.nome);
+                    break;
+                case 2:
+                    scanf("%[^\n]%*c", (*t).dono.cpf);
+                    strcpy((*terrenos[i]).dono.cpf, (*t).dono.cpf);
+                    break;
+                case 3:
+                    scanf("%d %d %d", &((*t).dono.data_nascimento.dia), &((*t).dono.data_nascimento.mes), &((*t).dono.data_nascimento.ano));
+                    (*terrenos[i]).dono.data_nascimento.dia = (*t).dono.data_nascimento.dia;
+                    (*terrenos[i]).dono.data_nascimento.mes = (*t).dono.data_nascimento.mes;
+                    (*terrenos[i]).dono.data_nascimento.ano = (*t).dono.data_nascimento.ano;
+                    break;
+                case 4:
+                    scanf("%[^\n]%*c", (*t).dono.telefone);
+                    strcpy((*terrenos[i]).dono.telefone, (*t).dono.telefone);
+                    break;
+                case 5:
+                    scanf("%d %d %d", &((*t).data_compra.dia), &((*t).data_compra.mes), &((*t).data_compra.ano));
+                    (*terrenos[i]).data_compra.dia = (*t).data_compra.dia;
+                    (*terrenos[i]).data_compra.mes = (*t).data_compra.mes;
+                    (*terrenos[i]).data_compra.ano = (*t).data_compra.ano;
+                    break;
+                case 6:
+                    scanf("%f %f", &(*t).largura, &(*t).comprimento);
+                    (*terrenos[i]).largura = (*t).largura;
+                    (*terrenos[i]).comprimento = (*t).comprimento;
+                    break;
+                case 7:
+                    scanf("%f", &(*t).preco_m2);
+                    (*terrenos[i]).preco_m2 = (*t).preco_m2;
+                    break;
+                default:
+                    printf("Opcao invalida!\n");
+                    scanf("%d", &option);
+            }
+            encontrado = 1;
             break;
         }
     }
-    if (!found) {
+    if (!encontrado) {
         printf("Nenhum terreno com ID %d foi encontrado.\n", id);
         printf("---------------------------------------------\n");
     }
 } // Function 5 - Renato
 double calcularValorTerreno(terreno **terrenos, int id) {
-    int found = 0;
+    int encontrado = 0;
     double valor_terreno;
     for (int i = 0; i < 100; i++) {
         if (terrenos[i] != NULL) {
@@ -95,11 +138,11 @@ double calcularValorTerreno(terreno **terrenos, int id) {
                 (*t).area = (*t).largura * (*t).comprimento;
             }
             valor_terreno = (double)(*t).area * (double)(*t).preco_m2;
-            found = 1;
+            encontrado = 1;
             break;
         }
     }
-    if (!found) {
+    if (!encontrado) {
         printf("Nenhum terreno com ID %d foi encontrado.\n", id);
         printf("---------------------------------------------\n");
         return -1;
