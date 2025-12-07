@@ -14,6 +14,9 @@ typedef struct Terrenos {
   float largura, comprimento, area, preco_m2;
 } terreno;
 
+void clearScreen(void);
+void pausas(int ms);
+void slowPrint(const char *txt, int delay);
 void ordenarTerrenos(terreno **terrenos);
 void inicializarVetor(terreno ***terrenos);
 void criarTerreno(terreno **terrenos);
@@ -27,4 +30,3 @@ double calcularValorTotal(terreno **terrenos);
 void salvarTerrenos(terreno **terrenos, const char *nomeArquivo);
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo);
 void liberarTodosTerrenos(terreno **terrenos);
-void clearScreen(void);
