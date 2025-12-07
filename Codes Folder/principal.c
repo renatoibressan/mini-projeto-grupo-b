@@ -85,6 +85,7 @@ int main(char *nomeArquivo) {
       default: printf("Opcao invalida! Pressione ENTER para voltar: "); getchar();
     } 
   }
+  liberarTodosTerrenos(t);
   clearScreen();
   return 0;
 }
