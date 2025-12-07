@@ -17,9 +17,10 @@ typedef struct Terrenos {
 void clearScreen(void);
 void pausas(int ms);
 void slowPrint(const char *txt, int delay);
+int idExiste(int id, int ids[], int count);
 void ordenarTerrenos(terreno **terrenos);
 void inicializarVetor(terreno ***terrenos);
-void criarTerreno(terreno **terrenos);
+void criarTerreno(terreno **terrenos, int ids[], int *ids_count);
 void deletarTerreno(terreno ***terrenos);
 void mostrarTerreno(terreno **terrenos, int id);
 void editarTerreno(terreno **terrenos, int id);

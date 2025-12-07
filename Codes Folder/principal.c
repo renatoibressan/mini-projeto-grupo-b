@@ -11,6 +11,8 @@ int main(char *nomeArquivo) {
   terreno **t;
   int i, idTeste, count;
   double valorTerreno, valorTotal;
+  int ids[100]; 
+  int ids_count = 0;
   inicializarVetor(&t);
   clearScreen();
   while (option != '0') {
@@ -33,7 +35,7 @@ int main(char *nomeArquivo) {
     clearScreen();
     switch (option) {
       case 'A':
-        criarTerreno(t);
+        criarTerreno(t,ids, &ids_count);
         break;
       case 'B':
         deletarTerreno(&t);
