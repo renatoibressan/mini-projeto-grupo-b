@@ -83,11 +83,6 @@ void deletarTerreno(terreno ***terrenos) {
     }
 }
 void mostrarTerreno(terreno **terrenos, int id) {
-    if (terrenos[z-1] == NULL) {
-        printf("Nao ha terrenos para mostrar!\n");
-        printf("---------------------------------------------\n");
-        return;
-    }
     int i = 0;
     int encontrado = 0;
     ordenarTerrenos(terrenos);
@@ -261,8 +256,7 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     }
 }
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
-    int i = 0;
-    int lidos;
+    int i = 0, lidos;
     FILE *arquivo = fopen(nomeArquivo, "rb");
     if (arquivo == NULL) {
         printf("Nao foi possivel carregar o arquivo '%s'.\n", nomeArquivo);
