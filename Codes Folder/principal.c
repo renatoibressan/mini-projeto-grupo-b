@@ -24,6 +24,7 @@ int main(char *nomeArquivo) {
     printf("H. Calcular o valor de todos os terrenos\n");
     printf("I. Salvar os terrenos\n");
     printf("J. Carregar os terrenos\n");
+    printf("0. Encerrar o programa.\n");
     printf("Escolha uma das opcoes acima: ");
     option = getchar();
     getchar();
@@ -37,23 +38,41 @@ int main(char *nomeArquivo) {
         deletarTerreno(&t);
         break;
       case 'C':
-        printf("Insira um ID para procura do terreno: ");
-        scanf("%d", &idTeste);
-        mostrarTerreno(t, idTeste);
+        if (*t == NULL) {
+          printf("Nao ha terrenos para mostrar!\n");
+          printf("---------------------------------------------\n");
+          break;
+        } else {
+          printf("Insira um ID para procura do terreno: ");
+          scanf("%d", &idTeste);
+          mostrarTerreno(t, idTeste);
+        }
         break;
       case 'D':
-        printf("Insira um ID para procura do terreno: ");
-        scanf("%d", &idTeste);
-        editarTerreno(t, idTeste);
+        if (*t == NULL) {
+          printf("Nao ha terrenos para editar!\n");
+          printf("---------------------------------------------\n");
+          break;
+        } else {
+          printf("Insira um ID para procura do terreno: ");
+          scanf("%d", &idTeste);
+          editarTerreno(t, idTeste);
+        }
         break;
       case 'E':
-        printf("Insira um ID para procura do terreno: ");
-        scanf("%d", &idTeste);
-        valorTerreno = calcularValorTerreno(t, idTeste);
-        if (valorTerreno == -1) break;
-        else {
-          printf("Valor do Terreno de ID %d: R$ %.2f\n", idTeste, valorTerreno);
+        if (*t == NULL) {
+          printf("Nao ha terrenos para calcular o valor!\n");
           printf("---------------------------------------------\n");
+          break;
+        } else {
+          printf("Insira um ID para procura do terreno: ");
+          scanf("%d", &idTeste);
+          valorTerreno = calcularValorTerreno(t, idTeste);
+          if (valorTerreno == -1) break;
+          else {
+            printf("Valor do Terreno de ID %d: R$ %.2f\n", idTeste, valorTerreno);
+            printf("---------------------------------------------\n");
+          }
         }
         break;
       case 'F':

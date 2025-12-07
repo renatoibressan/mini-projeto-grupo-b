@@ -50,11 +50,6 @@ void deletarTerreno(terreno ***terrenos) {
     }
 }
 void mostrarTerreno(terreno **terrenos, int id) {
-    if (terrenos == NULL) {
-        printf("Nao ha terrenos para mostrar!\n");
-        printf("---------------------------------------------\n");
-        return;
-    }
     int i = 0;
     int encontrado = 0;
     ordenarTerrenos(terrenos);
@@ -93,11 +88,6 @@ void mostrarTerreno(terreno **terrenos, int id) {
     }
 }
 void editarTerreno(terreno **terrenos, int id) {
-    if (terrenos == NULL) {
-        printf("Nao ha terrenos para editar!\n");
-        printf("---------------------------------------------\n");
-        return;
-    }
     int option, encontrado = 0;
     terreno *t = malloc(sizeof(terreno));
     for (int i = 0; i < z; i++) {
@@ -161,11 +151,6 @@ void editarTerreno(terreno **terrenos, int id) {
     }
 }
 double calcularValorTerreno(terreno **terrenos, int id) {
-    if (terrenos == NULL) {
-        printf("Nao ha terrenos para calcular o valor!\n");
-        printf("---------------------------------------------\n");
-        return -1;
-    }
     for (int i = 0; i < z; i++) {
         if (terrenos[i] != NULL && (*terrenos[i]).id == id) {
             terreno *t = terrenos[i];
