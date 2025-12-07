@@ -39,6 +39,9 @@ int main(char *nomeArquivo) {
         deletarTerreno(&t);
         break;
       case 'C':
+        printf("Insira um ID para procura do terreno: ");
+        scanf("%d", &idTeste);
+        mostrarTerreno(t,idTeste);
         if (*t == NULL) {
           slowPrint("Nao ha terrenos para mostrar!\n", 50);
           slowPrint("---------------------------------------------\n", 25);
