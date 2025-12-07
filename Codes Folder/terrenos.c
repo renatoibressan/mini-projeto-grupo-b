@@ -44,17 +44,37 @@ void ordenarTerrenos(terreno **terrenos) {
         }
     }
 }
+int idExiste(int id, int ids[], int count) {
+    for (int i = 0; i < count; i++) {
+        if (ids[i] == id) { return 1;}
+    }
+    return 0; 
+}
 void inicializarVetor(terreno ***terrenos) {
     *terrenos = malloc(100*sizeof(terreno*));
     for (int i = 0; i < 100; i++) {
         (*terrenos)[i] = NULL;
     }
 }
-void criarTerreno(terreno **terrenos) {
+void criarTerreno(terreno **terrenos, int ids[], int *ids_count) {
     terreno *t = malloc(sizeof(terreno));
+    int novoId;
     printf("Por favor, insira os dados.\n");
-    printf("ID do terreno:\n");  
-    scanf("%d", &((*t).id));
+
+    do {
+        printf("ID do terreno:\n");  
+        scanf("%d", &novoId);
+
+        if (idExiste(novoId, ids, *ids_count)) {
+            printf("---------------------------------------------\n");
+            printf("O ID %d ja esta em uso. Por favor, digite outro ID.\n", novoId);
+            printf("---------------------------------------------\n");
+        } else {
+            (*t).id = novoId; 
+            break;
+        }
+    } while (1);
+    
     printf("Nome completo do dono:\n");
     scanf(" %[^\n]%*c",(*t).dono.nome);
     printf("CPF do dono (XXX.XXX.XXX-XX):\n");
@@ -70,10 +90,13 @@ void criarTerreno(terreno **terrenos) {
     printf("Valor do m2:\n");
     scanf("%f",&((*t).preco_m2));
     terrenos[z] = t;
+    ids[*ids_count] = novoId;
+    (*ids_count)++;
     printf("Terreno de ID %d criado com sucesso!\n", (*terrenos[z]).id);
     z++;
 }
-void deletarTerreno(terreno ***terrenos) {
+void deletarTerreno(terreno ***terrenos) {//está liberando a memória de todos os terrenos
+    //não só o do id
     for (int i = 0; i < 100; i++) {
         if ((*terrenos)[i] != NULL) {
             printf("Terreno de ID %d deletado com sucesso!\n", (*(*terrenos)[i]).id);
@@ -113,11 +136,11 @@ void mostrarTerreno(terreno **terrenos, int id) {
             break;
         }
         i++;
-        if (!encontrado) {
-            printf("Nenhum terreno com ID %d foi encontrado.\n", id);
-            slowPrint("---------------------------------------------\n", 25);
-            return;
-        }
+    }
+    if (!encontrado) {
+        printf("Nenhum terreno com ID %d foi encontrado.\n", id);
+        slowPrint("---------------------------------------------\n", 25);
+        return;
     }
 }
 void editarTerreno(terreno **terrenos, int id) {
@@ -125,7 +148,7 @@ void editarTerreno(terreno **terrenos, int id) {
     terreno *t = malloc(sizeof(terreno));
     for (int i = 0; i < z; i++) {
         if ((*terrenos[i]).id == id) {
-            printf("Opcoes:\n", 25);
+            slowPrint("Opcoes:\n", 25);
             slowPrint("1. Editar nome do dono\n", 50);
             slowPrint("2. Editar CPF do dono\n", 50);
             slowPrint("3. Editar data de nascimento do dono\n", 50);
@@ -176,11 +199,11 @@ void editarTerreno(terreno **terrenos, int id) {
             encontrado = 1;
             break;
         }
-        if (!encontrado) {
-            printf("Nenhum terreno com ID %d foi encontrado.\n", id);
-            slowPrint("---------------------------------------------\n", 25);
-            return;
-        }
+    }
+    if (!encontrado) {
+        printf("Nenhum terreno com ID %d foi encontrado.\n", id);
+        slowPrint("---------------------------------------------\n", 25);
+        return;
     }
 }
 double calcularValorTerreno(terreno **terrenos, int id) {
