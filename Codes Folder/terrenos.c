@@ -46,7 +46,9 @@ void ordenarTerrenos(terreno **terrenos) {
 }
 int idExiste(int id, int ids[], int count) {
     for (int i = 0; i < count; i++) {
-        if (ids[i] == id) { return 1;}
+        if (ids[i] == id) {
+            return 1;
+        }
     }
     return 0; 
 }
@@ -57,53 +59,59 @@ void inicializarVetor(terreno ***terrenos) {
     }
 }
 void criarTerreno(terreno **terrenos, int ids[], int *ids_count) {
+    int novoID;
     terreno *t = malloc(sizeof(terreno));
-    int novoId;
     printf("Por favor, insira os dados.\n");
-
     do {
-        printf("ID do terreno:\n");  
-        scanf("%d", &novoId);
-
-        if (idExiste(novoId, ids, *ids_count)) {
-            printf("---------------------------------------------\n");
-            printf("O ID %d ja esta em uso. Por favor, digite outro ID.\n", novoId);
-            printf("---------------------------------------------\n");
+        printf("ID do terreno: ");  
+        scanf("%d", &novoID);
+        if (idExiste(novoID, ids, *ids_count)) {
+            slowPrint("---------------------------------------------\n", 25);
+            printf("O ID %d ja esta em uso. Por favor, digite outro ID.\n", novoID);
+            slowPrint("---------------------------------------------\n", 25);
         } else {
-            (*t).id = novoId; 
+            (*t).id = novoID;
             break;
         }
     } while (1);
-    
-    printf("Nome completo do dono:\n");
-    scanf(" %[^\n]%*c",(*t).dono.nome);
-    printf("CPF do dono (XXX.XXX.XXX-XX):\n");
+    printf("Nome completo do dono: ");
+    scanf(" %[^\n]%*c", (*t).dono.nome);
+    printf("CPF do dono (XXX.XXX.XXX-XX): ");
     scanf("%[^\n]%*c", (*t).dono.cpf);
-    printf("Data de nascimento (DD MM AAAA):\n");
+    printf("Data de nascimento (DD MM AAAA): ");
     scanf("%d %d %d", &((*t).dono.data_nascimento.dia), &((*t).dono.data_nascimento.mes), &((*t).dono.data_nascimento.ano));
-    printf("Telefone do dono (DD-9XXXX-XXXX):\n");
-    scanf(" %[^\n]%*c",(*t).dono.telefone);
-    printf("Data de compra do terreno (DD MM AAAA):\n");
+    printf("Telefone do dono (DD-9XXXX-XXXX): ");
+    scanf(" %[^\n]%*c", (*t).dono.telefone);
+    printf("Data de compra do terreno (DD MM AAAA): ");
     scanf("%d %d %d", &((*t).data_compra.dia), &((*t).data_compra.mes), &((*t).data_compra.ano));
-    printf("As medidas da largura e  do comprimento:\n");
-    scanf("%f %f",&((*t).largura),&((*t).comprimento));
-    printf("Valor do m2:\n");
-    scanf("%f",&((*t).preco_m2));
+    printf("Medidas de largura e comprimento: ");
+    scanf("%f %f", &((*t).largura),&((*t).comprimento));
+    printf("Valor do m2: ");
+    scanf("%f", &((*t).preco_m2));
     terrenos[z] = t;
-    ids[*ids_count] = novoId;
+    ids[*ids_count] = (*terrenos[z]).id;
     (*ids_count)++;
+    slowPrint("---------------------------------------------\n", 25);
     printf("Terreno de ID %d criado com sucesso!\n", (*terrenos[z]).id);
+    slowPrint("---------------------------------------------\n", 25);
     z++;
 }
-void deletarTerreno(terreno ***terrenos) {//está liberando a memória de todos os terrenos
-    //não só o do id
-    for (int i = 0; i < 100; i++) {
+void deletarTerreno(terreno ***terrenos, int ids[], int *ids_count) {
+    int i;
+    for (i = 0; i < 100; i++) {
         if ((*terrenos)[i] != NULL) {
             printf("Terreno de ID %d deletado com sucesso!\n", (*(*terrenos)[i]).id);
             free((*terrenos)[i]);
             (*terrenos)[i] = NULL;
         }
     }
+    *ids_count = 0;
+    for (i = 0; i < 100; i++) {
+        ids[i] = 0;
+    }
+    z = 0;
+    printf("Terrenos deletados com sucesso!\n");
+    slowPrint("---------------------------------------------\n", 25);
 }
 void mostrarTerreno(terreno **terrenos, int id) {
     int i = 0;

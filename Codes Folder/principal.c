@@ -6,19 +6,18 @@
 int main(char *nomeArquivo) {
   clearScreen();
   slowPrint("===== SISTEMA GERENCIADOR DE BAIRROS =====\n", 50);
-  slowPrint("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n", 100);
+  slowPrint("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n", 50);
   char option = 'x';
   terreno **t;
-  int i, idTeste, count;
+  int i, idTeste, count, checkup = 0;
   double valorTerreno, valorTotal;
-  int ids[100]; 
-  int ids_count = 0;
-  inicializarVetor(&t);
+  int ids[100], ids_count = 0;
   clearScreen();
+  inicializarVetor(&t);
   while (option != '0') {
     slowPrint("===== MENU =====\nOpcoes:\n", 50);
     slowPrint("A. Criar um terreno\n", 25);
-    slowPrint("B. Deletar um terreno\n", 25);
+    slowPrint("B. Deletar os terrenos\n", 25);
     slowPrint("C. Mostrar um terreno\n", 25);
     slowPrint("D. Editar um terreno\n", 25);
     slowPrint("E. Calcular o valor de um terreno\n", 25);
@@ -27,7 +26,7 @@ int main(char *nomeArquivo) {
     slowPrint("H. Calcular o valor de todos os terrenos\n", 25);
     slowPrint("I. Salvar os terrenos\n", 25);
     slowPrint("J. Carregar os terrenos\n", 25);
-    slowPrint("0. Encerrar o programa.\n", 25);
+    slowPrint("0. Encerrar o programa\n", 25);
     slowPrint("Escolha uma das opcoes acima: ", 50);
     option = getchar();
     getchar();
@@ -35,10 +34,13 @@ int main(char *nomeArquivo) {
     clearScreen();
     switch (option) {
       case 'A':
-        criarTerreno(t,ids, &ids_count);
+        if (checkup == 0) inicializarVetor(&t);
+        criarTerreno(t, ids, &ids_count);
+        checkup = 1;
         break;
       case 'B':
-        deletarTerreno(&t);
+        deletarTerreno(&t, ids, &ids_count);
+        checkup = 0;
         break;
       case 'C':
         if (*t == NULL) {
@@ -104,7 +106,7 @@ int main(char *nomeArquivo) {
       case '0':
         slowPrint("Encerrando o programa...\n", 50); 
         break;
-      default: printf("Opcao invalida! Pressione ENTER para voltar: "); getchar();
+      default: printf("Opcao invalida! Pressione ENTER para voltar:\n"); getchar();
     } 
   }
   liberarTodosTerrenos(t);

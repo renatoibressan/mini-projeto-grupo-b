@@ -21,7 +21,7 @@ int idExiste(int id, int ids[], int count);
 void ordenarTerrenos(terreno **terrenos);
 void inicializarVetor(terreno ***terrenos);
 void criarTerreno(terreno **terrenos, int ids[], int *ids_count);
-void deletarTerreno(terreno ***terrenos);
+void deletarTerreno(terreno ***terrenos, int ids[], int *ids_count);
 void mostrarTerreno(terreno **terrenos, int id);
 void editarTerreno(terreno **terrenos, int id);
 double calcularValorTerreno(terreno **terrenos, int id);
