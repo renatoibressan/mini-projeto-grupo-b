@@ -39,7 +39,7 @@ int main(char *nomeArquivo) {
       case 'C':
         printf("Insira um ID para procura do terreno: ");
         scanf("%d", &idTeste);
-        mostrarTerreno(t, idTeste);
+        mostrarTerreno(t,idTeste);
         break;
       case 'D':
         printf("Insira um ID para procura do terreno: ");
