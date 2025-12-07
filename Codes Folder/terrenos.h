@@ -26,4 +26,5 @@ int contarTerrenosLivres(terreno ***terrenos);
 double calcularValorTotal(terreno **terrenos);
 void salvarTerrenos(terreno **terrenos, const char *nomeArquivo);
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo);
+void liberarTodosTerrenos(terreno **terrenos);
 void clearScreen(void);

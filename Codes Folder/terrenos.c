@@ -53,7 +53,7 @@ void mostrarTerreno(terreno **terrenos, int id) {
     int i = 0;
     int encontrado = 0;
     ordenarTerrenos(terrenos);
-    while (i < 100) {
+    while (i <z) {
         (*terrenos[i]).area = (*terrenos[i]).largura * (*terrenos[i]).comprimento;
         if ((*terrenos[i]).id == id) {
             printf("---------------------------------------------\n");
@@ -95,7 +95,7 @@ void editarTerreno(terreno **terrenos, int id) {
     }
     int option, encontrado = 0;
     terreno *t = malloc(sizeof(terreno));
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i <z; i++) {
         if ((*terrenos[i]).id == id) {
             printf("Opcoes:\n");
             printf("1. Editar nome do dono\n");
@@ -161,7 +161,7 @@ double calcularValorTerreno(terreno **terrenos, int id) {
         printf("---------------------------------------------\n");
         return -1;
     }
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < z; i++) {
         if (terrenos[i] != NULL && (*terrenos[i]).id == id) {
             terreno *t = terrenos[i];
             (*t).area = (*t).largura * (*t).comprimento;
@@ -178,7 +178,7 @@ int contarTerrenosOcupados(terreno ***terrenos) {
     int count = 0;
     for (int i = 0; i < 100; i++) {
         if ((*terrenos)[i] != NULL) count++;
-    }
+    }// poderiamos fazer só count=z;
     return count;
 }
 int contarTerrenosLivres(terreno ***terrenos) {
@@ -186,13 +186,13 @@ int contarTerrenosLivres(terreno ***terrenos) {
     int count = 0;
     for (int i = 0; i < 100; i++) {    
         if ((*terrenos)[i] == NULL) count++; 
-    }
+    }// poderiamos fazer só count=100-z;
     return count;
 }
 double calcularValorTotal(terreno **terrenos) {
     double valor_total_geral = 0;
     int i ;
-    for (i = 0; i < 100; i++) {
+    for (i = 0; i < z; i++) {
         if (terrenos[i] != NULL) {
             terreno *t = terrenos[i];
             (*t).area = (*t).largura * (*t).comprimento;
@@ -214,7 +214,7 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
         return;
     }
     ordenarTerrenos(terrenos);
-    for (i = 0; i < 100; i++) {
+    for (i = 0; i < z; i++) {
         if (terrenos[i] != NULL) {
             size_t resultado = fwrite(terrenos[i], sizeof(terrenos), 1, arquivo);
             if (resultado != 1) {
@@ -239,7 +239,7 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     }
 }
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
-    char linha[200];
+   // char linha[200];
     int i = 0;
     FILE *arquivo = fopen(nomeArquivo, "rb");
     if (arquivo == NULL) {
@@ -247,21 +247,24 @@ void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
         printf("---------------------------------------------\n");
         return;
     }
-    while (fgets(linha, sizeof(linha), arquivo) != NULL && i < 100) {
-        terrenos[i] = malloc(sizeof(terreno));
-        if (!terrenos[i]) exit(1);
-        int read = sscanf(linha, "%d %s %s %d %d %d %s %d %d %d %f %f %f", &(*terrenos[i]).id, (*terrenos[i]).dono.nome,
-            (*terrenos[i]).dono.cpf, &(*terrenos[i]).dono.data_nascimento.dia, &(*terrenos[i]).dono.data_nascimento.mes,
-            &(*terrenos[i]).dono.data_nascimento.ano, (*terrenos[i]).dono.telefone, &(*terrenos[i]).data_compra.dia,
-            &(*terrenos[i]).data_compra.mes, &(*terrenos[i]).data_compra.ano, &(*terrenos[i]).largura, &(*terrenos[i]).comprimento,
-            &(*terrenos[i]).preco_m2);
-        if (read != 13) {
-            printf("Erro na linha #%d do arquivo.\n", (i + 1));
-            printf("---------------------------------------------\n");
-            free(terrenos[i]);
-            terrenos[i] = NULL;
-            continue;
-        }
+    while(i<=z){ //(fgets(linha, sizeof(linha), arquivo) != NULL && i <z) {
+       // terrenos[i] = malloc(sizeof(terreno));
+       size_t lidos = fread(terrenos[i], sizeof(terreno), 1, arquivo);
+       if (lidos != 1) { 
+        break;}
+       // if (!terrenos[i]) exit(1);
+       // int read = sscanf(linha, "%d %s %s %d %d %d %s %d %d %d %f %f %f", &(*terrenos[i]).id, (*terrenos[i]).dono.nome,
+           // (*terrenos[i]).dono.cpf, &(*terrenos[i]).dono.data_nascimento.dia, &(*terrenos[i]).dono.data_nascimento.mes,
+           // &(*terrenos[i]).dono.data_nascimento.ano, (*terrenos[i]).dono.telefone, &(*terrenos[i]).data_compra.dia,
+           // &(*terrenos[i]).data_compra.mes, &(*terrenos[i]).data_compra.ano, &(*terrenos[i]).largura, &(*terrenos[i]).comprimento,
+           // &(*terrenos[i]).preco_m2);
+       // if (read != 13) {
+            //printf("Erro na linha #%d do arquivo.\n", (i + 1));
+           // printf("---------------------------------------------\n");
+           // free(terrenos[i]);
+           // terrenos[i] = NULL;
+           // continue;
+      //  }
         (*terrenos[i]).area = (*terrenos[i]).largura * (*terrenos[i]).comprimento;
         printf("ID: %d\n", (*terrenos[i]).id);
         printf("---------------------------------------------\n");
@@ -286,6 +289,18 @@ void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     fclose(arquivo);
     printf("Foram carregados do arquivo %d terrenos.\n", i);
     printf("---------------------------------------------\n");
+}
+void liberarTodosTerrenos(terreno **terrenos){
+    if (terrenos == NULL) {return;}
+
+    for (int i = 0; i < z; i++) {
+        if (terrenos[i] != NULL) {
+            free(terrenos[i]); 
+            terrenos[i] = NULL; 
+        }
+    }
+    free(terrenos);
+    z=0;
 }
 void clearScreen(void) {
 #ifdef _WIN32
