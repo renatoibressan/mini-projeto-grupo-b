@@ -6,7 +6,7 @@
 int main(char *nomeArquivo) {
   clearScreen();
   slowPrint("===== SISTEMA GERENCIADOR DE BAIRROS =====\n", 50);
-  slowPrint("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n", 50);
+  slowPrint("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n", 100);
   char option = 'x';
   terreno **t;
   int i, idTeste, count, checkup = 0;
@@ -117,7 +117,7 @@ int main(char *nomeArquivo) {
         carregarTerrenos(t, nomeArquivo);
         break;
       case '0':
-        slowPrint("Encerrando o programa...\n", 50); 
+        slowPrint("Encerrando o programa...\n", 75); 
         break;
       default: printf("Opcao invalida! Pressione ENTER para voltar:\n"); getchar();
     } 
