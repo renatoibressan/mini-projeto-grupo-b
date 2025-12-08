@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
   double valorTerreno, valorTotal;
   int ids[100], ids_count = 0;
   int c;
-  const char *nomeArquivo= "terrenos_padrao";
-  if (argc > 1) {nomeArquivo= argv[1];}
+  const char *nomeArquivo = "terrenos_padrao";
+  if (argc > 1) nomeArquivo = argv[1];
   clearScreen();
   inicializarVetor(&t);
   while (option != '0') {
@@ -111,11 +111,11 @@ int main(int argc, char *argv[]) {
         break;
       case 'I':
       case 'i':
-        salvarTerrenos(t,nomeArquivo );
+        salvarTerrenos(t, nomeArquivo);
         break;
       case 'J':
       case 'j':
-        carregarTerrenos(t,nomeArquivo);
+        carregarTerrenos(t, nomeArquivo);
         break;
       case '0':
         slowPrint("Encerrando o programa...\n", 75);
