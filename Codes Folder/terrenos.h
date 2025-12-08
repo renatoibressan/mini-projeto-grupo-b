@@ -14,15 +14,20 @@ typedef struct Terrenos {
   float largura, comprimento, area, preco_m2;
 } terreno;
 
+extern int z;
+
+//terrenos1.c
 void clearScreen(void);
 void pausas(int ms);
 void slowPrint(const char *txt, int delay);
-int idExiste(int id, int ids[], int count);
+void limparBuffer(void);
 void ordenarTerrenos(terreno **terrenos);
+int idExiste(int id, int ids[], int count);
 void inicializarVetor(terreno ***terrenos);
 void criarTerreno(terreno **terrenos, int ids[], int *ids_count);
 void deletarTerreno(terreno ***terrenos, int ids[], int *ids_count);
 void mostrarTerreno(terreno **terrenos, int id);
+//terrenos2.c
 void editarTerreno(terreno **terrenos, int id);
 double calcularValorTerreno(terreno **terrenos, int id);
 int contarTerrenosOcupados(terreno ***terrenos);
