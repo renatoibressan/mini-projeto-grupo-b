@@ -30,19 +30,22 @@ int main(char *nomeArquivo) {
     slowPrint("0. Encerrar o programa\n", 25);
     slowPrint("Escolha uma das opcoes acima: ", 50);
     option = getchar();
-    while ((c = getchar()) != '\n' && c != EOF) { }
+    while ((c = getchar()) != '\n' && c != EOF) {}
     clearScreen();
     switch (option) {
       case 'A':
+      case 'a':
         if (checkup == 0) inicializarVetor(&t);
         criarTerreno(t, ids, &ids_count);
         checkup = 1;
         break;
       case 'B':
+      case 'b':
         deletarTerreno(&t, ids, &ids_count);
         checkup = 0;
         break;
       case 'C':
+      case 'c':
         if (*t == NULL) {
           slowPrint("Nao ha terrenos para mostrar!\n", 50);
           slowPrint("---------------------------------------------\n", 25);
@@ -55,6 +58,7 @@ int main(char *nomeArquivo) {
         }
         break;
       case 'D':
+      case 'd':
         if (*t == NULL) {
           slowPrint("Nao ha terrenos para editar!\n", 50);
           slowPrint("---------------------------------------------\n", 25);
@@ -67,6 +71,7 @@ int main(char *nomeArquivo) {
         }
         break;
       case 'E':
+      case 'e':
         if (*t == NULL) {
           slowPrint("Nao ha terrenos para calcular o valor!\n", 50);
           slowPrint("---------------------------------------------\n", 25);
@@ -84,25 +89,30 @@ int main(char *nomeArquivo) {
         }
         break;
       case 'F':
+      case 'f':
         count = contarTerrenosOcupados(&t);
         printf("Terrenos Ocupados: %d\n", count);
         slowPrint("---------------------------------------------\n", 25);
         break;
       case 'G':
+      case 'g':
         count = contarTerrenosLivres(&t);
         printf("Terrenos Livres: %d\n", count);
         slowPrint("---------------------------------------------\n", 25);
         break;
       case 'H':
+      case 'h':
         valorTotal = calcularValorTotal(t);
         printf("Valor Total de todos os Terrenos: R$ %.2f\n", valorTotal);
         slowPrint("---------------------------------------------\n", 25);
         break;
       case 'I':
+      case 'i':
         nomeArquivo = "terrenos";
         salvarTerrenos(t, nomeArquivo);
         break;
       case 'J':
+      case 'j':
         nomeArquivo = "terrenos";
         carregarTerrenos(t, nomeArquivo);
         break;

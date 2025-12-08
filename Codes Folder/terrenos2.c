@@ -24,16 +24,20 @@ void editarTerreno(terreno **terrenos, int id) {
             slowPrint("7. Editar preco do m2 do terreno\n", 50);
             slowPrint("Qual edicao deseja realizar? ", 50);
             scanf("%d", &option);
+            limparBuffer();
             switch (option) {
                 case 1:
+                    printf("Inisra o novo nome: ");
                     scanf("%[^\n]%*c", (*t).dono.nome);
                     strcpy((*terrenos[i]).dono.nome, (*t).dono.nome);
                     break;
                 case 2:
+                    printf("Insira o novo CPF: ");
                     scanf("%[^\n]%*c", (*t).dono.cpf);
                     strcpy((*terrenos[i]).dono.cpf, (*t).dono.cpf);
                     break;
                 case 3:
+                    printf("Insira a nova data de nascimento: ");
                     scanf("%d %d %d", &((*t).dono.data_nascimento.dia), &((*t).dono.data_nascimento.mes), &((*t).dono.data_nascimento.ano));
                     limparBuffer();
                     (*terrenos[i]).dono.data_nascimento.dia = (*t).dono.data_nascimento.dia;
@@ -41,10 +45,12 @@ void editarTerreno(terreno **terrenos, int id) {
                     (*terrenos[i]).dono.data_nascimento.ano = (*t).dono.data_nascimento.ano;
                     break;
                 case 4:
+                    printf("Insira o novo telefone: ");
                     scanf("%[^\n]%*c", (*t).dono.telefone);
                     strcpy((*terrenos[i]).dono.telefone, (*t).dono.telefone);
                     break;
                 case 5:
+                    printf("Insira a nova data de compra: ");
                     scanf("%d %d %d", &((*t).data_compra.dia), &((*t).data_compra.mes), &((*t).data_compra.ano));
                     limparBuffer();
                     (*terrenos[i]).data_compra.dia = (*t).data_compra.dia;
@@ -52,12 +58,14 @@ void editarTerreno(terreno **terrenos, int id) {
                     (*terrenos[i]).data_compra.ano = (*t).data_compra.ano;
                     break;
                 case 6:
+                    printf("Insira as novas medidas de largura e comprimento: ");
                     scanf("%f %f", &(*t).largura, &(*t).comprimento);
                     limparBuffer();
                     (*terrenos[i]).largura = (*t).largura;
                     (*terrenos[i]).comprimento = (*t).comprimento;
                     break;
                 case 7:
+                    printf("Insira o novo preco do m2: ");
                     scanf("%f", &(*t).preco_m2);
                     limparBuffer();
                     (*terrenos[i]).preco_m2 = (*t).preco_m2;
