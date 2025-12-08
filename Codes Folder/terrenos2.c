@@ -158,15 +158,25 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
 }
 void carregarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     int i = 0, lidos;
-    FILE *arquivo = fopen(nomeArquivo, "rb");
+    char linha[300];
+    FILE *arquivo = fopen(nomeArquivo, "r");
     if (arquivo == NULL) {
         printf("Nao foi possivel carregar o arquivo '%s'.\n", nomeArquivo);
         slowPrint("---------------------------------------------\n", 25);
         return;
     }
-    while(i < z){
-        lidos = fread(terrenos[i], sizeof(terreno), 1, arquivo);
-        if (lidos != 1) break;
+    while(fgets(linha, sizeof(linha), arquivo) != NULL) {
+        terrenos[i] = malloc(sizeof(terreno));
+        if (!terrenos[i]) exit(1);
+        lidos = sscanf(linha, "%d %99[^0-9] %14s %d %d %d %14s %d %d %d %f %f %f", &(*terrenos[i]).id, (*terrenos[i]).dono.nome, 
+            (*terrenos[i]).dono.cpf, &(*terrenos[i]).dono.data_nascimento.dia, &(*terrenos[i]).dono.data_nascimento.mes, 
+            &(*terrenos[i]).dono.data_nascimento.ano, (*terrenos[i]).dono.telefone, &(*terrenos[i]).data_compra.dia, 
+            &(*terrenos[i]).data_compra.mes, &(*terrenos[i]).data_compra.ano, &(*terrenos[i]).largura, &(*terrenos[i]).comprimento, 
+            &(*terrenos[i]).preco_m2);
+        if (lidos != 13) {
+            free(terrenos[i]);
+            continue;
+        }
         (*terrenos[i]).area = (*terrenos[i]).largura * (*terrenos[i]).comprimento;
         printf("ID: %d\n", (*terrenos[i]).id);
         slowPrint("---------------------------------------------\n", 25);

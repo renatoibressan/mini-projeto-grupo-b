@@ -6,7 +6,7 @@
 int main(int argc, char *argv[]) {
   clearScreen();
   slowPrint("===== SISTEMA GERENCIADOR DE BAIRROS =====\n", 60);
-  slowPrint("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan   \n", 80);
+  slowPrint("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n   \n", 80);
   terreno **t;
   char option = 'x';
   int c, idTeste, count, checkup = 0;
