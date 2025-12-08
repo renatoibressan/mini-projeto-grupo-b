@@ -12,6 +12,7 @@ int main(char *nomeArquivo) {
   int i, idTeste, count, checkup = 0;
   double valorTerreno, valorTotal;
   int ids[100], ids_count = 0;
+  int c;
   clearScreen();
   inicializarVetor(&t);
   while (option != '0') {
@@ -29,8 +30,7 @@ int main(char *nomeArquivo) {
     slowPrint("0. Encerrar o programa\n", 25);
     slowPrint("Escolha uma das opcoes acima: ", 50);
     option = getchar();
-    getchar();
-    if (option >= 'a' && option <= 'z') option -= 32;
+    while ((c = getchar()) != '\n' && c != EOF) { }
     clearScreen();
     switch (option) {
       case 'A':
@@ -50,6 +50,7 @@ int main(char *nomeArquivo) {
         } else {
           printf("Insira um ID para procura do terreno: ");
           scanf("%d", &idTeste);
+          limparBuffer();
           mostrarTerreno(t, idTeste);
         }
         break;
@@ -61,6 +62,7 @@ int main(char *nomeArquivo) {
         } else {
           printf("Insira um ID para procura do terreno: ");
           scanf("%d", &idTeste);
+          limparBuffer();
           editarTerreno(t, idTeste);
         }
         break;
@@ -72,6 +74,7 @@ int main(char *nomeArquivo) {
         } else {
           printf("Insira um ID para procura do terreno: ");
           scanf("%d", &idTeste);
+          limparBuffer();
           valorTerreno = calcularValorTerreno(t, idTeste);
           if (valorTerreno == -1) break;
           else {
