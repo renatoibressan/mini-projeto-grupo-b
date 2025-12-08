@@ -6,6 +6,14 @@ O código demonstra boas práticas de organização, uso de estruturas compostas
 Repositório oficial:  
 https://github.com/renatoibressan/mini-projeto-grupo-b
 
+👤 Autores
+
+Aryan Douglas Borges Rodrigues
+
+Amanda Sales Alborgueti
+
+Renato Ikeda Bressan
+
 ---
 
 ## 📌 Objetivos do Projeto
@@ -125,13 +133,3 @@ carregarTerrenos(terreno **terrenos, const char *nomeArquivo)
 Utilidades gerais:
 clearScreen(), pausas(), limparBuffer(), slowPrint()
 
-👤 Autores
-
-Aryan Douglas Borges Rodrigues
-
-Amanda Sales Alborgueti
-
-Renato Ikeda Bressan
-
-Repositório oficial do grupo:
-https://github.com/renatoibressan/mini-projeto-grupo-b
