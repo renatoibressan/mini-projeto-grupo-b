@@ -3,7 +3,6 @@
 #include <string.h>
 #include "terrenos.h"
 
-//int main(char *nomeArquivo)
 int main(int argc, char *argv[]) {
   clearScreen();
   slowPrint("===== SISTEMA GERENCIADOR DE BAIRROS =====\n", 60);
