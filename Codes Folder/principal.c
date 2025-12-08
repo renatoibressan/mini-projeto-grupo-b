@@ -3,16 +3,19 @@
 #include <string.h>
 #include "terrenos.h"
 
-int main(char *nomeArquivo) {
+//int main(char *nomeArquivo)
+int main(int argc, char *argv[]) {
   clearScreen();
-  slowPrint("===== SISTEMA GERENCIADOR DE BAIRROS =====\n", 50);
-  slowPrint("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan\n", 100);
+  slowPrint("===== SISTEMA GERENCIADOR DE BAIRROS =====\n", 60);
+  slowPrint("Desenvolvido por:\nAmanda Sales Alborgueti\nAryan Douglas Borges Rodrigues\nRenato Ikeda Bressan   \n", 70);
   char option = 'x';
   terreno **t;
   int i, idTeste, count, checkup = 0;
   double valorTerreno, valorTotal;
   int ids[100], ids_count = 0;
   int c;
+  const char *nomeArquivo= "terrenos_padrao";
+  if (argc > 1) {nomeArquivo= argv[1];}
   clearScreen();
   inicializarVetor(&t);
   while (option != '0') {
@@ -108,16 +111,14 @@ int main(char *nomeArquivo) {
         break;
       case 'I':
       case 'i':
-        nomeArquivo = "terrenos";
-        salvarTerrenos(t, nomeArquivo);
+        salvarTerrenos(t,nomeArquivo );
         break;
       case 'J':
       case 'j':
-        nomeArquivo = "terrenos";
-        carregarTerrenos(t, nomeArquivo);
+        carregarTerrenos(t,nomeArquivo);
         break;
       case '0':
-        slowPrint("Encerrando o programa...\n", 75); 
+        slowPrint("Encerrando o programa...\n", 75);
         break;
       default: printf("Opcao invalida! Pressione ENTER para voltar:\n"); getchar();
     } 
