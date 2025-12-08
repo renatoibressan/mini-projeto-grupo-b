@@ -15,14 +15,14 @@ void editarTerreno(terreno **terrenos, int id) {
     for (int i = 0; i < z; i++) {
         if ((*terrenos[i]).id == id) {
             slowPrint("Opcoes:\n", 25);
-            slowPrint("1. Editar nome do dono\n", 50);
-            slowPrint("2. Editar CPF do dono\n", 50);
-            slowPrint("3. Editar data de nascimento do dono\n", 50);
-            slowPrint("4. Editar telefone do dono\n", 50);
-            slowPrint("5. Editar data de compra do terreno\n", 50);
-            slowPrint("6. Editar medidas do terreno\n", 50);
-            slowPrint("7. Editar preco do m2 do terreno\n", 50);
-            slowPrint("Qual edicao deseja realizar? ", 50);
+            slowPrint("1. Editar nome do dono\n", 25);
+            slowPrint("2. Editar CPF do dono\n", 25);
+            slowPrint("3. Editar data de nascimento do dono\n", 25);
+            slowPrint("4. Editar telefone do dono\n", 25);
+            slowPrint("5. Editar data de compra do terreno\n", 25);
+            slowPrint("6. Editar medidas do terreno\n", 25);
+            slowPrint("7. Editar preco do m2 do terreno\n", 25);
+            slowPrint("Qual edicao deseja realizar? ", 25);
             scanf("%d", &option);
             limparBuffer();
             switch (option) {
