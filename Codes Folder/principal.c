@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
   int c, idTeste, count, checkup = 0;
   double valorTerreno, valorTotal;
   int ids[100], ids_count = 0;
-  const char *nomeArquivo = "terrenos_padrao";
+  const char *nomeArquivo = "terrenos_padrao.txt";
   if (argc > 1) nomeArquivo = argv[1];
   clearScreen();
   inicializarVetor(&t);

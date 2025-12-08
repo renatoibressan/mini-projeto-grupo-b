@@ -126,7 +126,7 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     char lista_ids[150] = ""; 
     char id_buffer[10];  
     int i;
-    FILE *arquivo = fopen(nomeArquivo, "wb");
+    FILE *arquivo = fopen(nomeArquivo, "w");
     if (arquivo == NULL) {
         printf("Nao foi possivel salvar o arquivo '%s'.\n", nomeArquivo);
         slowPrint("---------------------------------------------\n", 25);
@@ -135,16 +135,15 @@ void salvarTerrenos(terreno **terrenos, const char *nomeArquivo) {
     ordenarTerrenos(terrenos);
     for (i = 0; i < z; i++) {
         if (terrenos[i] != NULL) {
-            size_t resultado = fwrite(terrenos[i], sizeof(terreno), 1, arquivo);
-            if (resultado != 1) {
-                printf("Nao foi possivel salvar o terreno ID %d.\n", (*terrenos[i]).id);
-                slowPrint("---------------------------------------------\n", 25);
-            } else {
-                registros_salvos++;
-                if (strlen(lista_ids) < 100) {  
-                    snprintf(id_buffer, sizeof(id_buffer), "%d, ", (*terrenos[i]).id);
-                    strcat(lista_ids, id_buffer);
-                }
+            fprintf(arquivo, "%d %s %s %d %d %d %s %d %d %d %.2f %.2f %.2f\n", (*terrenos[i]).id, (*terrenos[i]).dono.nome, 
+                (*terrenos[i]).dono.cpf, (*terrenos[i]).dono.data_nascimento.dia, (*terrenos[i]).dono.data_nascimento.mes, 
+                (*terrenos[i]).dono.data_nascimento.ano, (*terrenos[i]).dono.telefone, (*terrenos[i]).data_compra.dia, 
+                (*terrenos[i]).data_compra.mes, (*terrenos[i]).data_compra.ano, (*terrenos[i]).largura, (*terrenos[i]).comprimento, 
+                (*terrenos[i]).preco_m2);
+            registros_salvos++;
+            if (strlen(lista_ids) < 100) {  
+                snprintf(id_buffer, sizeof(id_buffer), "%d, ", (*terrenos[i]).id);
+                strcat(lista_ids, id_buffer);
             }
         }
     }
