@@ -3,6 +3,9 @@
 Este projeto implementa um sistema modular para gerenciamento de terrenos utilizando linguagem C.  
 O código demonstra boas práticas de organização, uso de estruturas compostas, vetores dinâmicos, manipulação de arquivos e modularização apropriada para projetos de médio porte.
 
+Repositório oficial:  
+https://github.com/renatoibressan/mini-projeto-grupo-b
+
 ---
 
 ## 📌 Objetivos do Projeto
@@ -121,3 +124,14 @@ carregarTerrenos(terreno **terrenos, const char *nomeArquivo)
 
 Utilidades gerais:
 clearScreen(), pausas(), limparBuffer(), slowPrint()
+
+👤 Autores
+
+Aryan Douglas Borges Rodrigues
+
+Amanda Sales Alborgueti
+
+Renato Ikeda Bressan
+
+Repositório oficial do grupo:
+https://github.com/renatoibressan/mini-projeto-grupo-b
